@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تقييم الأساتذة</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+h1 { margin-top: 20px; color: #00ffd5; }
+
+select {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+    font-size: 16px;
+}
+
+table {
+    margin: auto;
+    width: 80%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+}
+
+th, td { padding: 15px; }
+
+th { background: #00c9a7; }
+
+tr:nth-child(even) {
+    background: rgba(255,255,255,0.05);
+}
+
+button {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4b5c;
+    color: white;
+    cursor: pointer;
+}
+
+.details {
+    display: none;
+    color: #ffd166;
+    font-size: 14px;
+}
+
+footer {
+    margin-top: 30px;
+    background: #111;
+    padding: 15px;
+    color: #00ffd5;
+}
+</style>
+</head>
+
+<body>
+
+<h1>تقييم الأساتذة</h1>
+
+<select onchange="changeMonth(this.value)">
+<option value="sep">سبتمبر</option>
+<option value="oct">أكتوبر</option>
+<option value="nov">نوفمبر</option>
+<option value="dec">ديسمبر</option>
+<option value="jan">جانفي</option>
+<option value="feb">فيفري</option>
+<option value="mar">مارس</option>
+<option value="april" selected>أفريل</option>
+<option value="may">ماي</option>
+</select>
+
+<table>
+<thead>
+<tr>
+<th>الترتيب</th>
+<th>الأستاذ</th>
+<th>التفاصيل</th>
+</tr>
+</thead>
+
+<tbody id="body"></tbody>
+</table>
+
+<footer>
+التنويه: الأساتذة المواد الاختيارية و الرياضة غير موجودين في القائمة و شكراً
+</footer>
+
+<script>
+const data = {
+
+april: [
+{name:"سيرين بن مسعود", score:10, note:"ممتازة برشا"},
+{name:"وديع الوسلاتي", score:9.75, note:"شرح واضح"},
+{name:"ياسمين علية", score:9, note:"باهي"},
+{name:"شهاب بن مرزوق", score:8.75, note:"جيد مع كامل احترماتي"},
+{name:"درصاف بن مبارك", score:8.25, note:"محترمة"},
+{name:"الباهي عبيد", score:8, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:7.75, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:7, note:"تفوق ملحوظ"},
+{name:"لمجد الحاجري", score:0, note:"فضيحة (ايسنا منك)"}
+],
+
+sep: [
+{name:"وديع الوسلاتي", score:9.75, note:"بداية قوية"},
+{name:"سيرين بن مسعود", score:9, note:"ممتازة"},
+{name:"شهاب بن مرزوق", score:8.75, note:"باهي"},
+{name:"ياسمين علية", score:8.25, note:"جيد"},
+{name:"درصاف بن مبارك", score:8, note:"محترمة"},
+{name:"الباهي عبيد", score:7.80, note:"مرضي"
+},
+  {name:"بسمة الرمضاني", score:7.75, note:"باهية اما شمايتية"},
+ 
+{name:"فاطمة العياري", score:6, note:"عادية"},
+{name:"لمجد الحاجري", score:2, note:"سئ ردي و الي مش عاجبو اخرالي"}
+],
+
+oct: [{name:"سيرين بن مسعود", score:9.75, note:"تعليم جيد جدا و شكر"},
+{name:"وديع الوسلاتي", score:9, note:"عالمي"},
+{name:"ياسمين علية", score:8.75, note:"باهي اوكي"},
+{name:"درصاف بن مبارك", score:8.25, note:"جيدة"},
+{name:"شهاب بن مرزوق", score:8, note:"محترم"},
+{name:"الباهي عبيد", score:7.5, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:7, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:6, note:"عادية"},
+{name:"لمجد الحاجري", score:2, note:"سئ ردي و الي مش عاجبو تو تعملولي عملة"}],
+  
+nov: [{name:"سيرين بن مسعود", score:10, note:" وايوا مدام"},
+{name:"وديع الوسلاتي", score:9, note:"ممتازة"},
+{name:"ياسمين علية", score:8.75, note:"باهي"},
+{name:"شهاب بن مرزوق", score:8.25, note:"جيد"},
+{name:"درصاف بن مبارك", score:8, note:"محترمة"},
+{name:"الباهي عبيد", score:7.5, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:7, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:6, note:"عادية"},
+{name:"لمجد الحاجري", score:2, note:"تفو عليك و على ليجابك"}],
+  
+dec: [{name:"سيرين بن مسعود", score:9.75, note:"عالمية"},
+{name:"وديع الوسلاتي", score:9, note:"ممتازة"},
+{name:"شهاب بن مرزوق", score:8.90, note:"باهي"},
+{name:"ياسمين علية", score:8.35, note:"جيد"},
+{name:"درصاف بن مبارك", score:8.25, note:"محترمة"},
+{name:"الباهي عبيد", score:8.15, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:8.10, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:8.00, note:"عادية"},
+{name:"لمجد الحاجري", score:1.5, note:"يا كارثة"}],
+  
+jan: [{name:"سيرين بن مسعود", score:9.50, note:"chapeau عليك"},
+{name:"وديع الوسلاتي", score:9, note:"ممتازة"},
+{name:"ياسمين علية", score:8.75, note:"باهي"},
+{name:"شهاب بن مرزوق", score:8.25, note:"جيد"},
+{name:"درصاف بن مبارك", score:8, note:"محترمة"},
+{name:"الباهي عبيد", score:7.5, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:7.25, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:7, note:"عادية"},
+{name:"لمجد الحاجري", score:0.5, note:"قتلت شطر كلاس"}],
+  
+feb: [{name:"سيرين بن مسعود", score:9.75, note:"حلوة جدا"},
+{name:"وديع الوسلاتي", score:9, note:"ممتازة"},
+{name:"شهاب بن مرزوق", score:8.75, note:"باهي"},
+{name:"ياسمين علية", score:8.25, note:"جيدة"},
+{name:"درصاف بن مبارك", score:8, note:"محترمة"},
+{name:"الباهي عبيد", score:7.5, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:7.05, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:7, note:"عادية"},
+{name:"لمجد الحاجري", score:1, note:"يا كلب"}],
+  
+mar: [{name:"سيرين بن مسعود", score:9.75, note:"الافضل بدون منازع"},
+{name:"وديع الوسلاتي", score:9, note:"ممتازة"},
+{name:"ياسمين علية", score:8.75, note:"باهية"},
+{name:"شهاب بن مرزوق", score:8.25, note:"جيد"},
+{name:"درصاف بن مبارك", score:8, note:"محترمة"},
+{name:"الباهي عبيد", score:7.5, note:"مرضي"},
+  {name:"بسمة الرمضاني", score:7, note:"باهية اما شمايتية"},
+{name:"فاطمة العياري", score:6.75, note:"عادية"},
+{name:"لمجد الحاجري", score:2, note:"يا خرا كلسونك بلكاكا"}],
+  
+may: []
+};
+
+function load(month){
+
+if(data[month].length === 0){
+document.getElementById("body").innerHTML =
+`<tr><td colspan="3">🚫 لا توجد معلومات لهذا الشهر</td></tr>`;
+return;
+}
+
+let html = "";
+
+data[month].forEach((t,i)=>{
+html += `
+<tr>
+<td>${i+1}</td>
+<td>${t.name}</td>
+<td>
+<button onclick="toggle(${i})">إظهار</button>
+<div class="details" id="d${i}">
+التقييم: ${t.score}/10 <br>
+ملاحظات: ${t.note}
+</div>
+</td>
+</tr>
+`;
+});
+
+document.getElementById("body").innerHTML = html;
+}
+
+function toggle(i){
+let d = document.getElementById("d"+i);
+d.style.display = d.style.display === "block" ? "none" : "block";
+}
+
+function changeMonth(month){
+load(month);
+}
+
+load("april");
+</script>
+
+</body>
+</html>

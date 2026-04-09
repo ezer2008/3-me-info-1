@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>3 علوم إعلامية 1</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+
+    /* خلفية */
+    background: url("https://images.unsplash.com/photo-1588072432836-e10032774350") no-repeat center center/cover;
+}
+
+/* طبقة شفافة */
+.overlay {
+    background: rgba(0,0,0,0.6);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* الصندوق */
+.container {
+    background: rgba(255,255,255,0.1);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* العنوان */
+h1 {
+    font-size: 38px;
+    color: #00ffd5;
+    margin-bottom: 10px;
+}
+
+/* النص الصغير */
+p {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* الأزرار (روابط) */
+a {
+    display: block;
+    width: 230px;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+/* ألوان */
+.btn1 { background: #ff4b5c; color: white; }
+.btn2 { background: #00c9a7; color: white; }
+.btn3 { background: #ffc75f; color: black; }
+
+a:hover {
+    transform: scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <div class="container">
+        <h1>مرحبا بكم في 3 علوم إعلامية 1</h1>
+        <p>(هنا نعرض لكم جميع الاحصائيات)</p>
+
+        <!-- أزرار -->
+        <a href="teachers.html" class="btn1">تقييم الأساتذة</a>
+        <a href="tests.html" class="btn2">الفروض</a>
+        <a href="holidays.html" class="btn3">الأيام العطل القادمة</a>
+    </div>
+</div>
+
+</body>
+</html>

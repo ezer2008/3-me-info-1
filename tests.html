@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>الفروض</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    color: white;
+    text-align: center;
+
+    /* خلفية أستاذ */
+    background: url("https://images.unsplash.com/photo-1588072432836-e10032774350") no-repeat center center/cover;
+}
+
+/* طبقة شفافة */
+.overlay {
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,50,0.7));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* الصندوق */
+.box {
+    background: rgba(255,255,255,0.1);
+    padding: 50px;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0,255,213,0.5);
+}
+
+/* النص */
+h1 {
+    font-size: 40px;
+    color: #00ffd5;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #00ffd5;
+}
+
+p {
+    font-size: 18px;
+    color: #ffc75f;
+    text-shadow: 0 0 10px #ffc75f;
+}
+
+/* تأثير حركة خفيفة */
+.box:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <div class="box">
+        <h1>📚 الفروض</h1>
+        <p>لا توجد معلومات حاليا</p>
+    </div>
+</div>
+
+</body>
+</html>
